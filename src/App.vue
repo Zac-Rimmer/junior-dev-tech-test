@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="d-flex justify-content-center align-items-center flex-column">
+      <img alt="Regatta Group" src="./assets/Regatta_Group-Logo.svg" width="200" height="80" class="py-3"/>
+    </div>
+    <Product/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Product from './components/Product.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Product
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "./assets/css/poppins.css"
+
+body {
+  font-family: 'Poppins', sans-serif;
 }
 </style>
