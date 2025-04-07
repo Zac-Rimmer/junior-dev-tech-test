@@ -33,7 +33,7 @@ Open http://localhost:8080/ on your browser to view the application.
 ## Submission 
 - Fork this repository
 - Complete the goals from above
-- Document your findings on the bugs and any other information you find relevant
+- Document your findings on the bugs and any other information you find relevant in the `CHANGELOG.md` file
 - Submit a pull request or provide a link to your repositiory to Zac and James on the emails below
 
 ## Contacts
