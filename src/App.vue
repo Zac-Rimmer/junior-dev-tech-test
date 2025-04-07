@@ -27,7 +27,6 @@ export default {
 <style lang="scss">
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "./assets/css/poppins.css";
-
 body {
   font-family: "Poppins", sans-serif;
 }
