@@ -14,7 +14,7 @@
           />
         </div>
         <div class="col-4 p-0">
-          <p class="offer">
+          <p class="offer poppins-light">
             {{ product.product_offer_label }}
           </p>
           <h1 class="text-left font-weight-bold border-bottom">
@@ -122,7 +122,7 @@ h3 {
 }
 .offer {
   padding-left: 0.3em;
-  margin-top: 0.5em;
+  margin-top: 0;
   border-left-width: 0.3em !important;
   border-left: solid;
   border-left-color: #bb5400;
