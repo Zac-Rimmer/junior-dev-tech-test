@@ -4,9 +4,9 @@
       <img
         alt="Regatta Group"
         src="./assets/Regatta_Group-Logo.svg"
-        width="200"
-        height="80"
-        class="py-3"
+        width="150"
+        height="auto"
+        class="py-2"
       />
     </div>
     <Product />
