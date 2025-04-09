@@ -10,7 +10,6 @@
             :width="media.width"
             :src="media.image"
             :alt="media.alt"
-            :class="media.alt"
           />
         </div>
         <div class="details col-4 p-0">
@@ -119,20 +118,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@media screen and (max-width: 600px) {
-  .details {
-    width: 90%;
-    margin-left: 1rem;
-  }
-}
-@media screen and (max-width: 1392px) {
-  .size-group-item {
-    margin-top: 1em;
-  }
-}
-#image-gallery {
-  margin-bottom: 1rem;
-}
+// #image-gallery {
+//   margin-bottom: 1rem;
+// }
 #image-gallery > * {
   width: 50%;
   height: auto;
@@ -170,6 +158,17 @@ h3 {
   margin-right: 0.6em;
   border-radius: 0 !important;
   border-color: black;
+}
+@media screen and (max-width: 755px) {
+  .details {
+    width: 90%;
+    margin-left: 1rem;
+  }
+}
+@media screen and (max-width: 1392px) {
+  .size-group-item {
+    margin-top: 1em;
+  }
 }
 // Styling to be added here if needed. SASS is allowed if preferred
 </style>
