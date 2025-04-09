@@ -1,10 +1,10 @@
 <template>
   <div id="product" class="container">
-    <div class="row">
-      <div class="col-md-12 col-lg-8">
-        <div class="row g-3 mb-4">
-          <div class="col-sm-12 col-md-6" v-for="(image, index) in product.media_gallery" :key="index">
-            <img :src="image.image" :alt="image.alt" class="img-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-12 col-lg-7 ">
+        <div class="row g-3 mb-5 ">
+          <div class="col-sm-12 col-md-6 " v-for="(image, index) in product.media_gallery" :key="index">
+            <img :src="image.image" :alt="image.alt" class="img-fluid m-0 p-0">
           </div>
         </div>
       </div>
@@ -14,16 +14,18 @@
         <hr class="h-line">
         <div class="d-flex justify-content-between small ">
           <div class="d-flex gap-3">
-            <span>Original<br>£{{ product.rrp.toFixed(2) }}</span>
-            <div>Now<br> <span class="text-danger">£{{ product.selling_price.toFixed(2) }}</span> </div>
+            <span>Original<br><span :class="{ 'text-decoration-line-through': hasDiscount }">£{{ product.rrp.toFixed(2)
+                }}</span></span>
+            <div v-if="hasDiscount">Now<br> <span class="text-danger">£{{ product.selling_price.toFixed(2) }}</span>
+            </div>
           </div>
-          <span class="text-danger align-self-center">| Save {{ }} |</span>
+          <span v-if="hasDiscount" class="text-danger align-self-center discount">Save {{ discount }} %</span>
         </div>
         <hr class="h-line">
         <div class="row g-3">
           <div v-for="(colour, index) in product.alternative_colours" :key="index" class="col-auto">
-            <a :href="colour.url" :title="colour.alt_text" style="display: inline-block;">
-              <img :src="colour.image" :alt="colour.alt_text" :width="60" :height="60" class="img-fluid">
+            <a :href="colour.url" :title="colour.alt_text">
+              <img :src="colour.image" :alt="colour.alt_text" :width="65" class="img-fluid">
             </a>
           </div>
         </div>
@@ -31,15 +33,18 @@
         <div class="my-4">
           <label class="text-muted small mb-1" for="size-select">Select Size</label>
           <div class="d-flex flex-wrap gap-2">
-            <button v-for="size in product.product_size_labels" :key="size"
-              class="size-button btn btn-outline-secondary rounded-0 flex-fill" @click="selectedSize = size">
+            <button v-for="size in product.product_size_labels" :key="size" class="size-button btn rounded-0" :class="{
+              'btn-outline-secondary': selectedSize !== size,
+              'btn-secondary active': selectedSize === size
+            }" @click="selectedSize = size">
               <div class="small">{{ size }}</div>
             </button>
           </div>
         </div>
         <hr class="h-line">
-        <button type="button" class="add-to-cart-btn btn bg-black text-white rounded-pill w-100">Add To Bag</button>
-        <p class="mt-3 mb-2">Description</p>
+        <button type="button" :disabled="!selectedSize" @click="addToBag"
+          class="add-to-cart-btn btn bg-black text-white rounded-pill w-100">Add To Bag</button>
+        <h6 class="mt-3 mb-2 poppins-regular">Description</h6>
         <p class="small poppins-light">{{ product.product_description }}</p>
         <p v-html="product.product_bulletpoints" class="small poppins-medium "></p>
         <p>
@@ -47,7 +52,6 @@
           <span class="text-muted">{{ product.product_sku }}</span>
         </p>
       </div>
-
     </div>
   </div>
 </template>
@@ -63,7 +67,25 @@ export default {
       selectedSize: null,
     }
   },
-  // Any Vue lifecycle hooks and custom JavaScript code can be added here
+  computed: {
+    hasDiscount() {
+      return this.product.rrp > this.product.selling_price;
+    },
+    discount() {
+      if (this.hasDiscount) {
+        const discount = this.product.rrp - this.product.selling_price;
+        return Math.round((discount / this.product.rrp) * 100);
+      }
+      return 0;
+    }
+  },
+  methods: {
+    addToBag() {
+      if (this.selectedSize) {
+        alert(`Your selected size: ${this.selectedSize}`);
+      }
+    }
+  }
 }
 </script>
 
@@ -80,16 +102,32 @@ export default {
 }
 
 .size-button {
-  height: 45px;
+  height: 50px;
+  width: 65px;
 }
 
 .add-to-cart-btn {
-  padding-top: 0.55rem;
-  padding-bottom: 0.55rem;
+  padding: 0.7rem 0;
 }
 
-#product.container {
-  // did not want to mess around container-fluid
-  max-width: 1550px;
+.discount {
+  border-left: 2px solid red;
+  border-right: 2px solid red;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.btn-outline-secondary.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+@media (min-width: 1320px) {
+
+  // when the screen is more than xxl, we make the standart container bigger
+  .container {
+    max-width: 1600px;
+  }
 }
 </style>
