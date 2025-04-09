@@ -82,7 +82,7 @@ export default {
   methods: {
     addToBag() {
       if (this.selectedSize) {
-        alert(`You have selected size:: ${this.selectedSize}`);
+        alert(`You have selected size: ${this.selectedSize}`);
       }
     }
   }
