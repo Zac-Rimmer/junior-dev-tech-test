@@ -19,7 +19,7 @@
             <div v-if="hasDiscount">Now<br> <span class="text-danger">£{{ product.selling_price.toFixed(2) }}</span>
             </div>
           </div>
-          <span v-if="hasDiscount" class="text-danger align-self-center discount">Save {{ discount }} %</span>
+          <span v-if="hasDiscount" class="text-danger align-self-center discount ">Save {{ discount }} %</span>
         </div>
         <hr class="h-line">
         <div class="row g-3">
@@ -82,7 +82,7 @@ export default {
   methods: {
     addToBag() {
       if (this.selectedSize) {
-        alert(`Your selected size: ${this.selectedSize}`);
+        alert(`You have selected size:: ${this.selectedSize}`);
       }
     }
   }
@@ -113,14 +113,7 @@ export default {
 .discount {
   border-left: 2px solid red;
   border-right: 2px solid red;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-}
-
-.btn-outline-secondary.active {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
+  padding: 0 0.5em;
 }
 
 @media (min-width: 1320px) {
