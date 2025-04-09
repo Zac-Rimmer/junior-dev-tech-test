@@ -3,7 +3,7 @@
     <!-- Add your code here -->
     <div class="container font-adjust">
       <div class="row">
-        <div id="image-gallery" class="col">
+        <div id="image-gallery" class="col-sm">
           <img
             v-for="media in mediaGallery"
             :height="media.height"
@@ -13,7 +13,7 @@
             :class="media.alt"
           />
         </div>
-        <div class="col-4 p-0">
+        <div class="details col-4 p-0">
           <p class="offer poppins-light">
             {{ product.product_offer_label }}
           </p>
@@ -34,7 +34,7 @@
               </p>
             </div>
             <p class="selling-price ms-auto align-self-center my-0">
-              | Save 35% |
+              | Save {{ discount }}% |
             </p>
           </div>
           <div class="colour-images border-bottom py-2">
@@ -51,6 +51,7 @@
             <div class="w-100 d-flex flex-wrap sizes">
               <button
                 v-for="size in sizes"
+                @click="selectSize(size)"
                 class="font-adjust size-group-item poppins-light btn btn-outline-dark"
               >
                 {{ size }}
@@ -58,6 +59,7 @@
             </div>
           </div>
           <button
+            @click="addToBag"
             class="font-adjust rounded-pill w-100 btn btn-dark p-2 mx-1 my-2"
           >
             Add To Bag
@@ -89,18 +91,50 @@ export default {
       bulletpoints: product.product_bulletpoints,
       mediaGallery: product.media_gallery,
       altColours: product.alternative_colours,
+      rrp: product.rrp,
+      sellingPrice: product.selling_price,
+      chosenSize: "",
+      discount: "",
     };
+  },
+  methods: {
+    selectSize(size) {
+      this.chosenSize = size;
+    },
+    addToBag() {
+      if (this.chosenSize) {
+        return alert(`You have selected size: ${this.chosenSize}`);
+      }
+    },
+    calculateDiscount() {
+      const percentDiscount = ((this.sellingPrice - this.rrp) / this.rrp) * 100;
+      this.discount = Math.abs(percentDiscount);
+    },
+  },
+  mounted() {
+    this.calculateDiscount();
   },
   // Any Vue lifecycle hooks and custom JavaScript code can be added here
 };
 </script>
 
 <style scoped lang="scss">
+@media screen and (max-width: 600px) {
+  .details {
+    width: 90%;
+    margin-left: 1rem;
+  }
+}
+@media screen and (max-width: 1392px) {
+  .size-group-item {
+    margin-top: 1em;
+  }
+}
 #image-gallery {
   margin-bottom: 1rem;
 }
 #image-gallery > * {
-  width: 49%;
+  width: 50%;
   height: auto;
   padding-inline: 0.7rem;
   padding-bottom: 1.4rem;
@@ -128,12 +162,12 @@ h3 {
   border-left-color: #bb5400;
 }
 .size-group-item {
-  width: 12.9%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+  width: 4.5em;
+  padding-top: 1.7em;
+  padding-bottom: 1.7em;
   padding-inline: 0;
   line-height: 0;
-  margin-right: 0.5em;
+  margin-right: 0.6em;
   border-radius: 0 !important;
   border-color: black;
 }
